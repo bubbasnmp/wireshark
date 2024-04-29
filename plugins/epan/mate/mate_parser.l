@@ -198,7 +198,8 @@ avp_operator		[$^~=<>!]
 quote				["]
 not_quoted			[^"]*
 
-include			"#include"
+/* include			"#include" */
+include_kw			Include
 filename		[-A-Za-z0-9_/.]+
 
 whitespace		[[:blank:]\r]+
@@ -216,7 +217,7 @@ blk_cmnt_stop  "*/"
 {newline}				yyextra->current_frame->linenum++;
 {whitespace}				;
 
-<OUTSIDE>{include}			BEGIN INCLUDING;
+<OUTSIDE>{include_kw}			BEGIN INCLUDING;
 
 <INCLUDING>{filename}			{
 	if ( yyextra->include_stack_ptr >= MAX_INCLUDE_DEPTH )
